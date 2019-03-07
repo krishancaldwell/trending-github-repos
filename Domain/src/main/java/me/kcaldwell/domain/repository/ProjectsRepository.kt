@@ -3,7 +3,6 @@ package me.kcaldwell.domain.repository
 import io.reactivex.Completable
 import io.reactivex.Observable
 import me.kcaldwell.domain.model.GithubProject
-import java.util.*
 
 /**
  * Interface to define what needs to be implemented in order to obtain and
