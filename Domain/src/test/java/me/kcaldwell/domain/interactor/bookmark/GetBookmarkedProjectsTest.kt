@@ -1,9 +1,9 @@
-package me.kcaldwell.domain.interactor
+package me.kcaldwell.domain.interactor.bookmark
 
 import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Observable
 import me.kcaldwell.domain.executor.PostExecutionThread
-import me.kcaldwell.domain.interactor.browse.GetProjects
+import me.kcaldwell.domain.interactor.bookmarked.GetBookmarkedProjects
 import me.kcaldwell.domain.model.GithubProject
 import me.kcaldwell.domain.repository.ProjectsRepository
 import me.kcaldwell.domain.test.ProjectDataFactory
@@ -12,39 +12,35 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
-class GetProjectsTest {
+class GetBookmarkedProjectsTest {
 
-    private lateinit var getProjects: GetProjects
+    private lateinit var getBookmarkedProjects: GetBookmarkedProjects
     @Mock lateinit var projectsRepository: ProjectsRepository
     @Mock lateinit var postExecutionThread: PostExecutionThread
 
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-        getProjects = GetProjects(projectsRepository, postExecutionThread)
+        getBookmarkedProjects = GetBookmarkedProjects(projectsRepository, postExecutionThread)
     }
 
     @Test
-    fun getProjectsCompletes() {
+    fun getBookmarkedProjectsCompletes() {
         stubGetProjects(Observable.just(ProjectDataFactory.makeProjectList(2)))
-        val testObserver = getProjects.buildUseCaseObservable().test()
+        val testObserver = getBookmarkedProjects.buildUseCaseObservable().test()
         testObserver.assertComplete()
     }
 
     @Test
-    fun getProjectsReturnsData() {
+    fun getBookmarkedProjectsReturnsData() {
         val projects = ProjectDataFactory.makeProjectList(2)
         stubGetProjects(Observable.just(projects))
-        val testObserver = getProjects.buildUseCaseObservable().test()
+        val testObserver = getBookmarkedProjects.buildUseCaseObservable().test()
         testObserver.assertValue(projects)
     }
 
-    /**
-     * Mocks get projects call
-     * Whenever getProjects() is called, return observable
-     */
     private fun stubGetProjects(observable: Observable<List<GithubProject>>) {
-        whenever(projectsRepository.getProjects())
+        whenever(projectsRepository.getBookmarkedProjects())
             .thenReturn(observable)
     }
 
