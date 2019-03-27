@@ -19,8 +19,10 @@ open class BookmarkProject @Inject constructor(
 
     data class Params constructor(val projectId: String) {
         companion object {
-            fun forProject(projectId: String) : Params {
+            fun forProject(projectId: String): Params {
                 return Params(projectId)
             }
         }
     }
+
+}
