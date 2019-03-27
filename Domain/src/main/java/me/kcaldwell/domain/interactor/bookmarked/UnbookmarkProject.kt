@@ -12,15 +12,17 @@ open class UnbookmarkProject @Inject constructor(
     postExecutionThread: PostExecutionThread
 ) : CompletableUseCase<UnbookmarkProject.Params>(postExecutionThread) {
 
-    override fun buildUseCaseCompletable(params: Params?): Completable {
+    public override fun buildUseCaseCompletable(params: Params?): Completable {
         if (params == null) throw IllegalArgumentException("Params must not be null")
 
         return projectsRepository.unbookmarkProjects(params.projectId)
     }
 
-    data class Params(val projectId: String) {
-        fun forProject(projectId: String) :Params {
-            return Params(projectId)
+    data class Params constructor(val projectId: String) {
+        companion object {
+            fun forProject(projectId: String): Params {
+                return Params(projectId)
+            }
         }
     }
 
