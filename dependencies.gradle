@@ -11,11 +11,15 @@ ext {
     rxJavaVersion = '2.0.2'
     javaxAnnotationVersion = '1.0'
     javaxInjectVersion = '1'
+    rxKotlinVersion = '2.1.0'
+    androidAnnotationsVersion = '21.0.3'
+    daggerVersion = '2.11'
 
     // Testing
     jUnitVersion = '4.12'
     assertJVersion = '3.8.0'
     mockitoVersion = '2.1.0'
+    roboelectricVersion = '3.4.2'
 
     domainDependencies = [
             javaxAnnotation: "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
@@ -27,6 +31,20 @@ ext {
             junit:   "junit:junit:${jUnitVersion}",
             mockito: "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockitoVersion}",
             assertj: "org.assertj:assertj-core:${assertJVersion}"
+    ]
+
+    dataDependencies = [
+            rxKotlin:        "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
+            javaxAnnotation: "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            javaxInject:     "javax.inject:javax.inject:${javaxInjectVersion}"
+    ]
+
+    dataTestDependencies = [
+            junit:        "junit:junit:${jUnitVersion}",
+            kotlinJUnit:  "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
+            assertj:      "org.assertj:assertj-core:${assertJVersion}",
+            mockito:      "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockitoVersion}",
+            roboelectric: "org.roboelectric:roboelectric:${roboelectricVersion}"
     ]
 
 }
